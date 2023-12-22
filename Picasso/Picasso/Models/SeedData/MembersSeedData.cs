@@ -23,9 +23,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Supoed1944",
                         MemberPassword = "Weiv8aif4aph",
                         MemberName = "牛富奎",
-                        MemberIdentity = "教職員",
+                        MemberIdentity = "中央大學教職員",
                         MemberPhone = "0945685246",
-                        MemberEmail = "NiuFuKui@gmail.com",
+                        MemberEmail = "NiuFuKui@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members
@@ -33,9 +33,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Queleandon",
                         MemberPassword = "LephaiB5",
                         MemberName = "蔣馥羽",
-                        MemberIdentity = "學生",
+                        MemberIdentity = "中央大學學生",
                         MemberPhone = "0978963241",
-                        MemberEmail = "JiangBiHu@gmail.com",
+                        MemberEmail = "112423080@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members
@@ -43,9 +43,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Sathect",
                         MemberPassword = "aDaT9au3",
                         MemberName = "雷雅玲",
-                        MemberIdentity = "學生",
+                        MemberIdentity = "中央大學學生",
                         MemberPhone = "0944698531",
-                        MemberEmail = "LeiYaLing@gmail.com",
+                        MemberEmail = "112423082@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members
@@ -53,9 +53,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Frasmils",
                         MemberPassword = "peiboh4A",
                         MemberName = "牛婷婷",
-                        MemberIdentity = "教職員",
+                        MemberIdentity = "中央大學教職員",
                         MemberPhone = "0989659976",
-                        MemberEmail = "NiuTingTing@gmail.com",
+                        MemberEmail = "NiuTingTing@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members
@@ -63,9 +63,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Whisyme",
                         MemberPassword = "Ier4cie4oo",
                         MemberName = "傅欣怡",
-                        MemberIdentity = "學生",
+                        MemberIdentity = "中央大學學生",
                         MemberPhone = "0912339689",
-                        MemberEmail = "FuXinYi@gmail.com",
+                        MemberEmail = "112423084@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members
@@ -83,9 +83,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Sherarcon",
                         MemberPassword = "Aef2taiw",
                         MemberName = "謝佩瑩",
-                        MemberIdentity = "教職員",
+                        MemberIdentity = "中央大學教職員",
                         MemberPhone = "0956875632",
-                        MemberEmail = "XiePeiYing@gmail.com",
+                        MemberEmail = "XiePeiYing@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members
@@ -93,9 +93,9 @@ namespace Picasso.Models.SeedData
                         MemberAccount = "Thoreeduck",
                         MemberPassword = "phabiesh5Sh",
                         MemberName = "羅培鈞",
-                        MemberIdentity = "學生",
+                        MemberIdentity = "中央大學學生",
                         MemberPhone = "092299638",
-                        MemberEmail = "LuoPouJun@gmail.com",
+                        MemberEmail = "112423086@cc.ncu.edu.tw",
                         CreateDate = DateTime.Parse("2023/11/25 00:00:00")
                     },
                     new Members

@@ -61,7 +61,7 @@ namespace Picasso.Migrations
 
                     b.HasKey("AdministratorId");
 
-                    b.ToTable("Administrators", (string)null);
+                    b.ToTable("Administrators");
                 });
 
             modelBuilder.Entity("Picasso.Model.ExhibitionApply", b =>
@@ -77,17 +77,20 @@ namespace Picasso.Migrations
                     b.Property<bool>("ApplyStatus")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("ApplyTime")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
 
+                    b.Property<Guid>("ExhibitionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ApplyId");
 
-                    b.ToTable("ExhibitionApply", (string)null);
+                    b.ToTable("ExhibitionApply");
                 });
 
             modelBuilder.Entity("Picasso.Model.Exhibitions", b =>
@@ -135,17 +138,23 @@ namespace Picasso.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Organizer")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid>("SpaceId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("ExhibitionId");
 
-                    b.ToTable("Exhibitions", (string)null);
+                    b.ToTable("Exhibitions");
                 });
 
             modelBuilder.Entity("Picasso.Model.Members", b =>
@@ -192,10 +201,10 @@ namespace Picasso.Migrations
 
                     b.HasKey("MemberId");
 
-                    b.ToTable("Members", (string)null);
+                    b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("Picasso.Model.Spaces", b =>
+            modelBuilder.Entity("Picasso.Models.Spaces", b =>
                 {
                     b.Property<Guid>("SpaceId")
                         .ValueGeneratedOnAdd()
@@ -206,6 +215,9 @@ namespace Picasso.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SpaceCapacity")
                         .HasColumnType("int");
@@ -230,7 +242,7 @@ namespace Picasso.Migrations
 
                     b.HasKey("SpaceId");
 
-                    b.ToTable("Spaces", (string)null);
+                    b.ToTable("Spaces");
                 });
 #pragma warning restore 612, 618
         }
