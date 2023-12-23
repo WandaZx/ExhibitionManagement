@@ -109,65 +109,100 @@ namespace Picasso.Controllers
                                             .Select(e => new Exhibitions { StartDate = e.StartDate, EndDate = e.EndDate })
                                             .ToList();
 
-                foreach (var exhibitionDate in exhibitionDateRecordList)
+                if(exhibitionDateRecordList.Count != 0)
                 {
-                    if ((applyDto.StartDate < exhibitionDate.StartDate) && (applyDto.EndDate > exhibitionDate.StartDate))
+                    foreach (var exhibitionDate in exhibitionDateRecordList)
                     {
-                        TempData["CurationApplyDateError"] = true;
-                        break;
-                    }
-                    else if ((applyDto.StartDate > exhibitionDate.StartDate) && (applyDto.EndDate < exhibitionDate.EndDate))
-                    {
-                        TempData["CurationApplyDateError"] = true;
-                        break;
-                    }
-                    else if ((applyDto.StartDate < exhibitionDate.EndDate) && (applyDto.EndDate > exhibitionDate.EndDate))
-                    {
-                        TempData["CurationApplyDateError"] = true;
-                        break;
-                    }
-                    else
-                    {
-                        //Save image to wwwroot/image/upload/
-                        string wwwRootPath = _hostEnvironment.WebRootPath;
-                        string fileName = Path.GetFileNameWithoutExtension(applyDto.ImageFile.FileName);
-                        string extension = Path.GetExtension(applyDto.ImageFile.FileName);
-
-                        applyDto.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                        string path = Path.Combine(wwwRootPath + "/image/upload/", fileName);
-
-                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        if ((applyDto.StartDate < exhibitionDate.StartDate) && (applyDto.EndDate > exhibitionDate.StartDate))
                         {
-                            applyDto.ImageFile.CopyToAsync(fileStream);
+                            TempData["CurationApplyDateError"] = true;
+                            break;
                         }
+                        else if ((applyDto.StartDate > exhibitionDate.StartDate) && (applyDto.EndDate < exhibitionDate.EndDate))
+                        {
+                            TempData["CurationApplyDateError"] = true;
+                            break;
+                        }
+                        else if ((applyDto.StartDate < exhibitionDate.EndDate) && (applyDto.EndDate > exhibitionDate.EndDate))
+                        {
+                            TempData["CurationApplyDateError"] = true;
+                            break;
+                        }
+                        else
+                        {
+                            var AddApplyToDBState = AddApplyToDB(applyDto);
 
-                        applyDto.ExhibitionStatus = "待審核";
+                            if (AddApplyToDBState)
+                            {
+                                TempData["CurationApplySuccess"] = true;
 
-                        //var memberId = _exhibitionManagementDbContext.Members
-                        //            .Where(m => m.MemberName == applyDto.MemberName)
-                        //            .Select(m => m.MemberId)
-                        //            .FirstOrDefault();
+                                return RedirectToAction("ManagementCenter", "Member"); //action, controller
+                            }
+                            else
+                            {
+                                return View();
+                            }
+                            
+                        }
+                    }
 
-                        Exhibitions exhibition = _mapper.Map<Exhibitions>(applyDto);
+                    return View();
+                }
+                else
+                {
+                    var AddApplyToDBState = AddApplyToDB(applyDto);
 
-                        exhibition.MemberId = memberId;
-
-                        //Insert record
-                        _exhibitionManagementDbContext.Exhibitions.Add(exhibition);
-                        _exhibitionManagementDbContext.SaveChanges();
-
+                    if (AddApplyToDBState)
+                    {
                         TempData["CurationApplySuccess"] = true;
 
                         return RedirectToAction("ManagementCenter", "Member"); //action, controller
                     }
+                    else
+                    {
+                        return View();
+                    }
+                    
                 }
-
-                return View();
             }
             else
             {
                 return View();
             }
+        }
+
+        private bool AddApplyToDB(Models.DTOs.Curation.ApplyDto applyDto)
+        {
+
+            //Save image to wwwroot/image/upload/
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            string fileName = Path.GetFileNameWithoutExtension(applyDto.ImageFile.FileName);
+            string extension = Path.GetExtension(applyDto.ImageFile.FileName);
+
+            applyDto.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            string path = Path.Combine(wwwRootPath + "/image/upload/", fileName);
+
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                applyDto.ImageFile.CopyToAsync(fileStream);
+            }
+
+            applyDto.ExhibitionStatus = "待審核";
+
+            var memberId = _exhibitionManagementDbContext.Members
+                        .Where(m => m.MemberName == applyDto.MemberName)
+                        .Select(m => m.MemberId)
+                        .FirstOrDefault();
+
+            Exhibitions exhibition = _mapper.Map<Exhibitions>(applyDto);
+
+            exhibition.MemberId = memberId;
+
+            //Insert record
+            _exhibitionManagementDbContext.Exhibitions.Add(exhibition);
+            _exhibitionManagementDbContext.SaveChanges();
+
+            return true;
         }
     }
 }

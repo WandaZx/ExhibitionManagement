@@ -191,7 +191,7 @@ namespace Picasso.Controllers
             }
         }
 
-            static string GetDateRangeString(DateTime startDate, DateTime endDate)
+        static string GetDateRangeString(DateTime startDate, DateTime endDate)
         {
             return startDate.ToString("yyyy/MM/dd") + " - " + endDate.ToString("yyyy/MM/dd");
         }
