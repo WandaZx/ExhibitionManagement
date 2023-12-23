@@ -32,11 +32,11 @@
                         <!-- 表格刪除會員的按鈕 -->
                         @if (item.MemberIdentity == "校外人士")
                         {
-                            <button type="button" class="deleteBtnbtn btn btn-primary px-3mary" style="background-color:rgba(9, 138, 155); color:white; border-color: rgba(9, 138, 155);" data-toggle="modal" data-target="#DeleteMemberModal">刪除</button>
+                            <button type="button" class="deleteBtn btn btn-primary px-3mary" style="background-color:rgba(9, 138, 155); color:white; border-color: rgba(9, 138, 155);" data-toggle="modal" data-target="#DeleteMemberModal">刪除</button>
                         }
                         else
                         {
-                            <button type="button" class="deleteBtnbtn btn btn-primary px-3mary" style="background-color:rgba(9, 138, 155); color:white; border-color: rgba(9, 138, 155);" data-toggle="modal" data-target="#DeleteMemberModal" disabled>刪除</button>
+                            <button type="button" class="deleteBtn btn btn-primary px-3mary" style="background-color:rgba(9, 138, 155); color:white; border-color: rgba(9, 138, 155);" data-toggle="modal" data-target="#DeleteMemberModal" disabled>刪除</button>
                         }
                         <input id="memberId" type="hidden" value='@item.MemberId' />
                         <input id="memberIdentity" type="hidden" value='@item.MemberIdentity' />
