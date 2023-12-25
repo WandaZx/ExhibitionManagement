@@ -34,48 +34,39 @@
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>展覽名稱 <span>*</span></div>
-                    <input type="text" id="ExhibitionName" name="ExhibitionName" required>
-                    <span asp-validation-for="ExhibitionName" class="text-danger"></span>
+                    <input type="text" id="ExhibitionName" maxlength="30" name="ExhibitionName" required>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>租借場地 <span>*</span></div>
                     @Html.DropDownListFor(model => model.SpaceId, (List<SelectListItem>)ViewBag.Space, "請選擇", new { @class = "RentPlaceSelect", @required = true })
-                    <span asp-validation-for="SpaceId" class="text-danger"></span>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>展覽類型 <span>*</span></div>
                     @Html.DropDownListFor(model => model.ExhibitionType, (List<SelectListItem>)ViewBag.ExhibitionType, "請選擇", new { @class = "RentPlaceSelect", @required = true })
-                    <span asp-validation-for="ExhibitionType" class="text-danger"></span>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>展覽資訊 <span>*</span></div>
-                    <textarea id="ExhibitionDescription" class="ExhibitionInfo" rows="5" name="ExhibitionDescription" required></textarea>
-                    <span asp-validation-for="ExhibitionDescription" class="text-danger"></span>
+                    <textarea id="ExhibitionDescription" class="ExhibitionInfo" rows="5" maxlength="500" name="ExhibitionDescription" required></textarea>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>活動海報 <span>*</span></div>
                     <input asp-for="ImageFile" id="ImageFile" accept="image/*" class="EventPoster" required>
-                    <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>主辦單位 <span>*</span></div>
-                    <input id="Organizer" type="text" name="Organizer" required>
-                    <span asp-validation-for="Organizer" class="text-danger" ></span>
+                    <input id="Organizer" type="text" name="Organizer" maxlength="20" required>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>協辦單位 <span>*</span></div>
-                    <input id="CoOrganizer" type="text" name="CoOrganizer" required>
-                    <span asp-validation-for="CoOrganizer" class="text-danger"></span>
+                    <input id="CoOrganizer" type="text" name="CoOrganizer" maxlength="100" required>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>開始日期 <span>*</span></div>
-                    <input id="StartDate" type="date" name="StartDate" required>
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                    <input id="StartDate" type="date" name="StartDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                 </div>
                 <div class="HoldingExhibitionEveryBox">
                     <div>結束日期 <span>*</span></div>
-                    <input id="EndDate" type="date" name="EndDate" required>
-                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                    <input id="EndDate" type="date" name="EndDate" min="@DateTime.Now.ToString("yyyy-MM-dd")" required>
                 </div>
                 <div class="HoldingExhibitionCheckBox">
                     <input type="checkbox" id="agreementCheckbox" required>

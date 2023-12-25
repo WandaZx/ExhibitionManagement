@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Picasso.Models.DTOs.Curation
@@ -13,18 +12,15 @@ namespace Picasso.Models.DTOs.Curation
         public string MemberEmail { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = "最多{1}字元")]
         public string ExhibitionName { get; set; }
 
         [Required]
-        [BindRequired]
         public Guid SpaceId { get; set; }
 
         [Required]
         public string ExhibitionType { get; set; }
 
         [Required]
-        [StringLength(500, ErrorMessage = "最多{1}字元")]
         public string ExhibitionDescription { get; set; }
 
         public string Image { get; set; }
@@ -34,11 +30,9 @@ namespace Picasso.Models.DTOs.Curation
         public IFormFile ImageFile { get; set; }
 
         [Required]
-        [StringLength(20, ErrorMessage = "最多{1}字元")]
         public string Organizer { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "最多{1}字元")]
         public string CoOrganizer { get; set; }
 
         [Required]
