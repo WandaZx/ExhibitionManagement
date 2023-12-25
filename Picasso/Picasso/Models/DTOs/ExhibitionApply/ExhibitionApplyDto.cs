@@ -1,4 +1,6 @@
-﻿namespace Picasso.Models.DTOs.ExhibitionApply
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Picasso.Models.DTOs.ExhibitionApply
 {
     public class ExhibitionApplyDto
     {
@@ -12,6 +14,7 @@
 
         public string SpaceName { get; set; }
 
+        [Required]
         public DateTime ApplyDate { get; set; }
 
         public string ApplyCount { get; set; }
