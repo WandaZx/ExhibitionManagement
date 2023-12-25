@@ -37,9 +37,9 @@ namespace Picasso.Controllers
 
             var spaceIdList = _exhibitionManagementDbContext.Spaces.Select(s => s.SpaceId).ToList();
 
-            if (TempData["exhibitionList"] != null)
+            if (TempData["ExhibitionList"] != null)
             {
-                exhibitionList = JsonConvert.DeserializeObject<List<Exhibitions>>(TempData["exhibitionList"].ToString());//TempData["exhibitionList"] as List<Exhibitions>;
+                exhibitionList = JsonConvert.DeserializeObject<List<Exhibitions>>(TempData["ExhibitionList"].ToString());
             }
             else
             {
@@ -142,7 +142,8 @@ namespace Picasso.Controllers
 
             }
 
-            TempData["exhibitionList"] = JsonConvert.SerializeObject(exhibitionList);
+            TempData["ExhibitionList"] = JsonConvert.SerializeObject(exhibitionList);
+            TempData["Period"] = period;
 
             return Json(true);
         }
