@@ -11,7 +11,23 @@
 </div>
 <div class="container">
     <div class="ExhibitionBox">
-        <div class="ExhibitionPeriod">當前展覽 (可預約)</div>
+        @{
+            string period = TempData["Period"] as string;
+
+            if (period == "past")
+            {
+                <div class="ExhibitionPeriod">過去展覽</div>
+            }
+            else if (period == "future")
+            {
+                <div class="ExhibitionPeriod">未來展覽 (可預約)</div>
+            }
+            else
+            {
+                
+                <div class="ExhibitionPeriod">當前展覽 (可預約)</div>
+            }
+        }
         <div class="ExhibitionVenue">
             <a id="artAreaLink">藝文展區</a>
             <a id="107MovieLink">107電影院</a>
