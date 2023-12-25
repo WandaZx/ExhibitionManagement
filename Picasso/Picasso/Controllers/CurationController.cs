@@ -70,38 +70,6 @@ namespace Picasso.Controllers
         [HttpPost]
         public IActionResult Apply(Models.DTOs.Curation.ApplyDto applyDto)
         {
-            var memberId = new Guid(HttpContext.Session.GetString("MemberId"));
-
-            var member = _exhibitionManagementDbContext.Members
-                            .Where(m => m.MemberId == memberId)
-                            .Select(m => new Members
-                            {
-                                MemberName = m.MemberName,
-                                MemberPhone = m.MemberPhone,
-                                MemberEmail = m.MemberEmail
-                            })
-                            .ToList();
-
-            ViewBag.Member = member[0];
-
-            var space = new List<SelectListItem>();
-
-            space = _exhibitionManagementDbContext.Spaces.Select(s => new SelectListItem { Value = s.SpaceId.ToString(), Text = s.SpaceName }).ToList();
-
-            ViewBag.Space = space;
-
-            var exhibitionType = new List<SelectListItem>()
-            {
-                new SelectListItem { Value = "個人展覽", Text = "個人展覽"},
-                new SelectListItem { Value = "專題展覽", Text = "專題展覽"},
-                new SelectListItem { Value = "畫展", Text = "畫展"},
-                new SelectListItem { Value = "影音展覽", Text = "影音展覽"},
-                new SelectListItem { Value = "其他", Text = "其他"}
-            };
-
-            ViewBag.ExhibitionType = exhibitionType;
-
-
             if (ModelState.IsValid)
             {
                 var exhibitionDateRecordList = _exhibitionManagementDbContext.Exhibitions
@@ -128,6 +96,11 @@ namespace Picasso.Controllers
                             TempData["CurationApplyDateError"] = true;
                             break;
                         }
+                        else if ((applyDto.StartDate == exhibitionDate.StartDate) && (applyDto.EndDate == exhibitionDate.EndDate))
+                        {
+                            TempData["CurationApplyDateError"] = true;
+                            break;
+                        }
                         else
                         {
                             var AddApplyToDBState = AddApplyToDB(applyDto);
@@ -136,17 +109,17 @@ namespace Picasso.Controllers
                             {
                                 TempData["CurationApplySuccess"] = true;
 
-                                return RedirectToAction("ManagementCenter", "Member"); //action, controller
+                                return RedirectToAction("ManagementCenter", "Member");
                             }
                             else
                             {
-                                return View();
+                                return RedirectToAction("Apply", "Curation");
                             }
                             
                         }
                     }
 
-                    return View();
+                    return RedirectToAction("Apply", "Curation");
                 }
                 else
                 {
@@ -156,18 +129,17 @@ namespace Picasso.Controllers
                     {
                         TempData["CurationApplySuccess"] = true;
 
-                        return RedirectToAction("ManagementCenter", "Member"); //action, controller
+                        return RedirectToAction("ManagementCenter", "Member");
                     }
                     else
                     {
-                        return View();
+                        return RedirectToAction("Apply", "Curation");
                     }
-                    
                 }
             }
             else
             {
-                return View();
+                return RedirectToAction("Apply", "Curation");
             }
         }
 
