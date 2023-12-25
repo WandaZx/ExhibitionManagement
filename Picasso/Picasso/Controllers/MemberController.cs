@@ -86,29 +86,57 @@ namespace Picasso.Controllers
         [HttpPost]
         public JsonResult Register(string account, string password, string confirmPassword, string username, string memberPhone, string memberEmail)
         {
-            if (password == confirmPassword)
+            if (ModelState.IsValid)
             {
-                var member = new Members() { 
-                    MemberAccount = account,
-                    MemberPassword = password,
-                    MemberName = username,
-                    MemberPhone = memberPhone,
-                    MemberEmail = memberEmail
-                };
-
-                if (memberEmail.Contains("@gmail.com"))
+                if (password == confirmPassword)
                 {
-                    member.MemberIdentity = "校外人士";
+                    var member = new Members()
+                    {
+                        MemberAccount = account,
+                        MemberPassword = password,
+                        MemberName = username,
+                        MemberPhone = memberPhone,
+                        MemberEmail = memberEmail
+                    };
 
-                    _exhibitionManagementDbContext.Members.Add(member);
-                    _exhibitionManagementDbContext.SaveChanges();
+                    if (memberEmail.Contains("@gmail.com"))
+                    {
+                        member.MemberIdentity = "校外人士";
 
-                    return Json(true);
+                        _exhibitionManagementDbContext.Members.Add(member);
+                        _exhibitionManagementDbContext.SaveChanges();
+
+                        return Json(true);
+                    }
+                    else
+                    {
+                        return Json(false);
+                    }
                 }
                 else
                 {
                     return Json(false);
                 }
+            }
+            else
+            {
+                return Json(false);
+            }
+        }
+
+        /// <summary>
+        /// 會員註冊(動作)
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult CheckMemberAccountDuplicate(string account)
+        {
+            var memberAccount = _exhibitionManagementDbContext.Members.Where(m => m.MemberAccount == account).FirstOrDefault();
+
+            if (memberAccount == null)
+            {
+                return Json(true);
             }
             else
             {
@@ -195,13 +223,22 @@ namespace Picasso.Controllers
         [HttpPost]
         public IActionResult UpdateMember(MemberDto memberDto)
         {
-            var member = _mapper.Map<Members>(memberDto);
+            if (ModelState.IsValid)
+            {
+                var member = _mapper.Map<Members>(memberDto);
 
-            _exhibitionManagementDbContext.Members.Update(member);
+                _exhibitionManagementDbContext.Members.Update(member);
 
-            _exhibitionManagementDbContext.SaveChanges();
+                _exhibitionManagementDbContext.SaveChanges();
 
-            return RedirectToAction("ManagementCenter", "Member"); //action, controller
+                TempData["UpdateMemberSuccess"] = true;
+
+                return RedirectToAction("ManagementCenter", "Member"); //action, controller
+            }
+            else
+            {
+                return RedirectToAction("ManagementCenter", "Member");
+            }
         }
 
         [HttpPost]

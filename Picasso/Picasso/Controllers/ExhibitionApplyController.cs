@@ -89,20 +89,29 @@ namespace Picasso.Controllers
         [HttpPost]
         public IActionResult Apply(ExhibitionApplyDto exhibitionApplyDto)
         {
-            var exhibitionApply = new ExhibitionApply();
+            if (ModelState.IsValid)
+            {
+                var exhibitionApply = new ExhibitionApply();
 
-            exhibitionApply.MemberId = new Guid(HttpContext.Session.GetString("MemberId"));
-            exhibitionApply.ExhibitionId = exhibitionApplyDto.ExhibitionId;
-            exhibitionApply.ApplyDate = exhibitionApplyDto.ApplyDate;
-            exhibitionApply.ApplyStatus = true;
-            
-            _exhibitionManagementDbContext.ExhibitionApply.Add(exhibitionApply);
-            _exhibitionManagementDbContext.SaveChanges();
+                exhibitionApply.MemberId = new Guid(HttpContext.Session.GetString("MemberId"));
+                exhibitionApply.ExhibitionId = exhibitionApplyDto.ExhibitionId;
+                exhibitionApply.ApplyDate = exhibitionApplyDto.ApplyDate;
+                exhibitionApply.ApplyStatus = true;
 
-            return RedirectToAction("ManagementCenter", "Member"); //action, controller 
+                _exhibitionManagementDbContext.ExhibitionApply.Add(exhibitionApply);
+                _exhibitionManagementDbContext.SaveChanges();
+
+                TempData["ExhibitionApplySuccess"] = true;
+
+                return RedirectToAction("ManagementCenter", "Member"); //action, controller 
+            }
+            else
+            {
+                return View(exhibitionApplyDto);
+            }
         }
 
-            static string GetDateRangeString(DateTime startDate, DateTime endDate)
+        static string GetDateRangeString(DateTime startDate, DateTime endDate)
         {
             return startDate.ToString("yyyy/MM/dd") + " - " + endDate.ToString("yyyy/MM/dd");
         }

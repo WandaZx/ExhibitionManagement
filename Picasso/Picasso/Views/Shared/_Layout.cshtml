@@ -144,27 +144,27 @@
                         <form id="registerForm" method="post">
                             <div class="form-group">
                                 <label for="registerUsername">帳號：</label>
-                                <input type="text" class="form-control" id="registerAccount" name="account" placeholder="輸入你的帳號">
+                                <input type="text" class="form-control" id="registerAccount" name="account" maxlength="20" placeholder="輸入你的帳號" required>
                             </div>
                             <div class="form-group">
                                 <label for="registerPassword">密碼：</label>
-                                <input type="password" class="form-control" id="registerPassword" name="password" placeholder="輸入你的密碼">
+                                <input type="password" class="form-control" id="registerPassword" name="password" maxlength="20" placeholder="輸入你的密碼" required>
                             </div>
                             <div class="form-group">
                                 <label for="confirmPassword">確認密碼：</label>
-                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="再次輸入密碼">
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" maxlength="20" placeholder="再次輸入密碼" required>
                             </div>
                             <div class="form-group">
                                 <label for="fullName">姓名：</label>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="輸入你的姓名">
+                                <input type="text" class="form-control" id="username" name="username" maxlength="12" placeholder="輸入你的姓名" required>
                             </div>
                             <div class="form-group">
                                 <label for="memberPhone">會員電話：</label>
-                                <input type="tel" class="form-control" id="memberPhone" name="memberPhone" placeholder="輸入你的電話號碼">
+                                <input type="tel" class="form-control" id="memberPhone" name="memberPhone" pattern="[0-9]{10}" maxlength="10" placeholder="輸入你的電話號碼" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">電子郵件：</label>
-                                <input type="email" class="form-control" id="memberEmail" name="memberEmail" placeholder="輸入你的電子郵件">
+                                <input type="email" class="form-control" id="memberEmail" name="memberEmail" pattern=".+@("@")gmail\.com" maxlength="30" oninvalid="alert('請輸入 @("@")gmail\.com 的 email');" placeholder="輸入你的電子郵件" required>
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-primary">註冊</button>

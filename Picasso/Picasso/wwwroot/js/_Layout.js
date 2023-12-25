@@ -63,25 +63,41 @@ $("#registerForm").on("submit", function (e) {
     e.preventDefault();
 
     $.ajax({
-        type: "POST",
-        url: "/Member/Register/",
+        type: "GET",
+        url: "/Member/CheckMemberAccountDuplicate?account=" + $("#registerAccount").val(),
         dataType: "json",
-        data: {
-            account: $("#registerAccount").val(),
-            password: $("#registerPassword").val(),
-            confirmPassword: $("#confirmPassword").val(),
-            username: $("#username").val(),
-            memberPhone: $("#memberPhone").val(),
-            memberEmail: $("#memberEmail").val()
-        },
         success: function (response) {
 
             if (response) {
-                alert("會員註冊成功！");
-                window.location.href = "/Exhibition/Index/";
+                $.ajax({
+                    type: "POST",
+                    url: "/Member/Register/",
+                    dataType: "json",
+                    data: {
+                        account: $("#registerAccount").val(),
+                        password: $("#registerPassword").val(),
+                        confirmPassword: $("#confirmPassword").val(),
+                        username: $("#username").val(),
+                        memberPhone: $("#memberPhone").val(),
+                        memberEmail: $("#memberEmail").val()
+                    },
+                    success: function (response) {
+
+                        if (response) {
+                            alert("會員註冊成功！");
+                            window.location.href = "/Exhibition/Index/";
+                        }
+                        else {
+                            alert("會員註冊失敗！請重新註冊。");
+                        }
+                    },
+                    error: function () {
+                        alert("系統發生錯誤");
+                    }
+                });
             }
             else {
-                alert("會員註冊失敗！請重新註冊。");
+                alert("會員名稱已註冊，請重新嘗試！");
             }
         },
         error: function () {

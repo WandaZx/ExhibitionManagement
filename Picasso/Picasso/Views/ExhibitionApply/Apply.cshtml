@@ -36,7 +36,7 @@
                         @if (!Model.ApplyStatus && !Model.IsSpaceCapacityFull)
                         {
                             <div class="ActivityContent ActivityTimeContent">
-                                @Html.DropDownListFor(model => model.ApplyDate, (List<SelectListItem>)ViewBag.ApplyDateList, "請選擇報名時間", new { @class = "DropDefualtWord" })
+                                @Html.DropDownListFor(model => model.ApplyDate, (List<SelectListItem>)ViewBag.ApplyDateList, "請選擇報名時間", new { @class = "DropDefualtWord", @required = true })
                             </div>
                         }
                         else if (Model.ApplyStatus)

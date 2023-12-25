@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Picasso.Models;
 
@@ -11,9 +12,11 @@ using Picasso.Models;
 namespace Picasso.Migrations
 {
     [DbContext(typeof(ExhibitionManagementDbContext))]
-    partial class ExhibitionManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225092936_add_Unique_MemberAccount_to_Members")]
+    partial class add_Unique_MemberAccount_to_Members
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
