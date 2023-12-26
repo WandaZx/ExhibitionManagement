@@ -29,6 +29,7 @@ using (var scope = app.Services.CreateScope())
     MembersSeedData.Initialize(services);
     SpacesSeedData.Initialize(services);
     ExhibitionsSeedData.Initialize(services);
+    ExhibitionApplySeedData.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.
