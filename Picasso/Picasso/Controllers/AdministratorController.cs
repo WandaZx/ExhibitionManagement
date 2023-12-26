@@ -20,11 +20,19 @@ namespace Picasso.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 系統管理員首頁(畫面)
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 系統管理員登出(動作)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Logout()
         {
@@ -33,12 +41,23 @@ namespace Picasso.Controllers
             return RedirectToAction("Index", "Exhibition"); //action, controller
         }
 
+        /// <summary>
+        /// 系統管理員變更密碼(畫面)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult UpdatePassword()
         {
             return View();
         }
 
+        /// <summary>
+        /// 系統管理員變更密碼(動作)
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult UpdatePassword(string oldPassword, string newPassword, string confirmPassword)
         {
@@ -66,6 +85,10 @@ namespace Picasso.Controllers
             }
         }
 
+        /// <summary>
+        /// 系統管理員策展管理(畫面)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult ReviewCuration()
         {
@@ -103,6 +126,11 @@ namespace Picasso.Controllers
             return View(reviewCurationDto);
         }
 
+        /// <summary>
+        /// 系統管理員審核策展(畫面)
+        /// </summary>
+        /// <param name="exhibitionId"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult ReviewCurationDetail(Guid exhibitionId)
         {
@@ -167,6 +195,12 @@ namespace Picasso.Controllers
             return View(reviewCurationDetailDto);
         }
 
+        /// <summary>
+        /// 系統管理員審核策展(動作)
+        /// </summary>
+        /// <param name="exhibitionId"></param>
+        /// <param name="exhibitionStatus"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult ReviewCurationDetail(Guid exhibitionId, string exhibitionStatus)
         {
@@ -193,6 +227,10 @@ namespace Picasso.Controllers
             }
         }
 
+        /// <summary>
+        /// 系統管理員會員管理(畫面)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult MemberManagement()
         {
@@ -201,6 +239,11 @@ namespace Picasso.Controllers
             return View(memberList);
         }
 
+        /// <summary>
+        /// 系統管理員刪除會員(動作)
+        /// </summary>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult DeleteMember(Guid memberId)
         {

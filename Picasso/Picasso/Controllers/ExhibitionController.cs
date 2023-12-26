@@ -20,12 +20,20 @@ namespace Picasso.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 首頁(畫面)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 活動總攬(畫面)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Overview()
         {
@@ -78,6 +86,12 @@ namespace Picasso.Controllers
             return View(exhibitionDetailDto);
         }
 
+        /// <summary>
+        /// 活動總攬(動作)
+        /// </summary>
+        /// <param name="spaceName"></param>
+        /// <param name="period"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult GetOverview(string spaceName, string period)
         {
@@ -149,7 +163,7 @@ namespace Picasso.Controllers
         }
 
         /// <summary>
-        /// 展覽詳細資訊
+        /// 展覽詳細資訊(畫面&動作)
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -175,6 +189,11 @@ namespace Picasso.Controllers
             return View(exhibitionDto);
         }
 
+        /// <summary>
+        /// 展場介紹(畫面&動作)
+        /// </summary>
+        /// <param name="spaceName"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult SpaceDetail(string spaceName)
         {
