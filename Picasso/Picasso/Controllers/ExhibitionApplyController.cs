@@ -20,6 +20,11 @@ namespace Picasso.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 報名展覽(畫面)
+        /// </summary>
+        /// <param name="exhibitionId"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Apply(Guid exhibitionId)
         {
@@ -86,6 +91,11 @@ namespace Picasso.Controllers
             return View(exhibitionApplyDto);
         }
 
+        /// <summary>
+        /// 報名展覽(動作)
+        /// </summary>
+        /// <param name="exhibitionApplyDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Apply(ExhibitionApplyDto exhibitionApplyDto)
         {

@@ -125,7 +125,7 @@ namespace Picasso.Controllers
         }
 
         /// <summary>
-        /// 會員註冊(動作)
+        /// 檢查會員名稱是否已註冊(動作)
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
@@ -144,6 +144,11 @@ namespace Picasso.Controllers
             }
         }
 
+        /// <summary>
+        /// 會員中心(會員&動作)
+        /// </summary>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult ManagementCenter(Guid memberId)
         {
@@ -220,6 +225,11 @@ namespace Picasso.Controllers
             return View(managementCenterDto);
         }
 
+        /// <summary>
+        /// 變更會員資料(動作)
+        /// </summary>
+        /// <param name="memberDto"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult UpdateMember(MemberDto memberDto)
         {
@@ -241,6 +251,13 @@ namespace Picasso.Controllers
             }
         }
 
+        /// <summary>
+        /// 會員變更密碼(動作)
+        /// </summary>
+        /// <param name="oldPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="confirmPassword"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult UpdateMemberPassword(string oldPassword, string newPassword, string confirmPassword)
         {
@@ -268,6 +285,12 @@ namespace Picasso.Controllers
             }
         }
 
+        /// <summary>
+        /// 刪除看展紀錄(動作)
+        /// </summary>
+        /// <param name="exhibitionId"></param>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult DeleteExhibitionApplyRecord(Guid exhibitionId, Guid memberId)
         {
@@ -286,6 +309,12 @@ namespace Picasso.Controllers
             return RedirectToAction("ManagementCenter", "Member");
         }
 
+        /// <summary>
+        /// 刪除策展紀錄(動作)
+        /// </summary>
+        /// <param name="exhibitionId"></param>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult DeleteCurationRecord(Guid exhibitionId, Guid memberId)
         {
