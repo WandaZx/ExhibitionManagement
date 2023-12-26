@@ -5,12 +5,22 @@ using Picasso.Models.SeedData;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ExhibitionManagementDbContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ExhibitionManagementDbContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ExhibitionManagementDbContext"))
+);
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(3600);
+});
 
 var app = builder.Build();
 
+// Add SeedData.
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -19,6 +29,7 @@ using (var scope = app.Services.CreateScope())
     MembersSeedData.Initialize(services);
     SpacesSeedData.Initialize(services);
     ExhibitionsSeedData.Initialize(services);
+    ExhibitionApplySeedData.Initialize(services);
 }
 
 // Configure the HTTP request pipeline.
@@ -36,8 +47,10 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Exhibition}/{action=Index}/{id?}");
 
 app.Run();

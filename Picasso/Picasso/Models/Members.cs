@@ -1,30 +1,29 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Picasso.Model
 {
+    [Index(nameof(MemberAccount), IsUnique = true)]
     public class Members
     {
         [Key]
-        [DisplayName("會員編號")]
         public Guid MemberId { get; set; }
 
-        [DisplayName("會員帳號")]
+        [Required]
         public string MemberAccount { get; set; }
 
-        [DisplayName("會員密碼")]
+        [Required]
         public string MemberPassword { get; set; }
 
-        [DisplayName("會員姓名")]
+        [Required]
         public string MemberName { get; set; }
 
-        [DisplayName("會員身分")]
         public string MemberIdentity { get; set; }
 
-        [DisplayName("手機號碼")]
+        [Required]
         public string MemberPhone { get; set; }
 
-        [DisplayName("會員信箱")]
+        [Required]
         public string MemberEmail { get; set; }
 
         public DateTime CreateDate { get; set; }
